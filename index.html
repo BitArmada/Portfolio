@@ -192,7 +192,7 @@
             resize();
             window.addEventListener('resize', resize);
 
-           if (true){
+           if (!navigator.gpu){
                 const ctx = canvas.getContext('2d');
                 var img = new Image();
                 img.src = 'https://bitarmada.github.io/webgpunet/background2.png';
