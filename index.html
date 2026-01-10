@@ -15,9 +15,22 @@
                 top: 0;
                 left: 0;
                 width: 100vw;
-                height: 100vw;
+                height: 100vh;
                 display: block;
                 z-index: 0;
+            }
+            /* Fallback video (created dynamically only when needed) */
+            video#fallbackVideo {
+                position: fixed;
+                inset: 0;
+                width: 100vw;
+                height: 100vh;
+                object-fit: cover;
+                z-index: 0;
+                image-rendering: pixelated;
+                image-rendering: crisp-edges;
+                -ms-interpolation-mode: nearest-neighbor;
+                background: #000;
             }
 
             /* Hero area that occupies the first viewport */
@@ -46,13 +59,21 @@
             .overlay h1, .overlay p { pointer-events: auto; margin: 0.25rem 0;}
             .overlay h1 {
                 font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-                font-weight: 300;
+                /* font-weight: 800; */
+                font-weight: 3000;
                 font-size: clamp(2.25rem, 6vw, 4rem);
+                /* letter-spacing: 0.06em; */
                 letter-spacing: 0.30em;
                 margin-bottom: 8px;
                 text-transform: none;
-                text-shadow: 0 6px 18px rgba(0,0,0,0.6);
+                /* color: white; */
+                /* move blend to overlay container for reliability */
+                /* mix-blend-mode: color-dodge; */
+                -webkit-font-smoothing: antialiased;
+                text-shadow: none;
             }
+            /* Apply blending at the overlay level so text inverts the canvas below */
+            .overlay { mix-blend-mode: difference; }
             .overlay p { font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 1.1rem; opacity: 0.95; }
 
             /* Scroll indicator */
@@ -127,6 +148,7 @@
                 -webkit-font-smoothing: antialiased;
                 background: rgba(6,6,8,0.68);
                 backdrop-filter: blur(8px) saturate(120%);
+                /* backdrop-filter: blur(20px) saturate(120%) brightness(2); */
             }
             .projects {
                 max-width: 1100px;
@@ -183,37 +205,126 @@
         </main>
 
         <script type="module">
-            import createBackground from 'https://bitarmada.github.io/webgpunet/background.js';
             const canvas = document.getElementById('canvas');
-            function resize() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerWidth;
+
+            function setCanvasSquare() {
+                const size = Math.max(window.innerWidth, window.innerHeight);
+                canvas.width = size;
+                canvas.height = size;
+                canvas.style.width = size + 'px';
+                canvas.style.height = size + 'px';
             }
-            resize();
-            window.addEventListener('resize', resize);
+            setCanvasSquare();
+            window.addEventListener('resize', setCanvasSquare);
 
-           if (!navigator.gpu){
-                const ctx = canvas.getContext('2d');
-                var img = new Image();
-                img.src = 'https://bitarmada.github.io/webgpunet/background2.png';
-                ctx.drawImage(img, 0,0, canvas.width, canvas.height);
-           }
-           else{ 
-                var stuff = await createBackground(canvas,400);
-                stuff.update();
+            async function useVideoFallback() {
+                canvas.style.display = 'none';
+                const video = document.createElement('video');
+                video.id = 'fallbackVideo';
+                video.src = './fallback.mp4';
+                video.loop = true;
+                video.muted = true;
+                video.autoplay = true;
+                video.playsInline = true;
+                video.preload = 'auto';
+                document.body.insertBefore(video, document.body.firstChild);
+                try { await video.play(); } catch (e) { /* autoplay may be blocked */ }
+            }
 
-                function loop(){
-                    stuff.update();
-                    requestAnimationFrame(loop);
+            async function initBackground() {
+                const hasGPU = !!navigator.gpu;
+                if (!hasGPU) {
+                    await useVideoFallback();
+                    return;
                 }
-                loop();
 
-                await stuff.activate(200,300,1);
-                setInterval(async () => {
+                try {
+                    const adapter = await navigator.gpu.requestAdapter();
+                    if (!adapter) { await useVideoFallback(); return; }
+                } catch (e) {
+                    await useVideoFallback();
+                    return;
+                }
+
+                try {
+                    const mod = await import('https://bitarmada.github.io/webgpunet/background.js');
+                    const createBackground = mod.default || mod;
+                    const stuff = await createBackground(canvas, 400);
+                    stuff.update();
+
+                    function loop(){
+                        stuff.update();
+                        requestAnimationFrame(loop);
+                    }
+                    loop();
+
                     await stuff.activate(200,300,1);
-                }, 1000*5);
-        }
-         </script>
+                    setInterval(async () => {
+                        stuff.activate(200,300,1)
+                    }, 1000)
+                } catch (e) {
+                    console.warn('WebGPU background failed, falling back to video', e);
+                    await useVideoFallback();
+                }
+            }
+
+            initBackground();
+            </script>
+    
+                <!--
+                    Development helper: saveFramesDev(stuff, { start, end, fps })
+                    - Commented out by default. Uncomment to use.
+                    - Pass the `stuff` background instance returned by `createBackground`.
+                    - Example: await saveFramesDev(stuff, { start:0, end:300, fps:60 });
+
+                <script>
+                /*
+                async function saveFramesDev(stuff, { start = 0, end = 3600, fps = 60 } = {}) {
+                    if (!stuff) {
+                        console.warn('saveFramesDev: missing `stuff` background instance');
+                        return;
+                    }
+                    const canvas = document.getElementById('canvas');
+
+                    function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+                    async function renderFrame(t) {
+                        // If your `stuff` exposes a time-based update, pass t if supported.
+                        if (typeof stuff.update === 'function') await stuff.update(t);
+                        else await stuff.update();
+                    }
+
+                    async function saveFrame(i) {
+                        const t = i / fps;
+                        await renderFrame(t);
+
+                        // ensure the browser composited the latest frame
+                        await new Promise(r => requestAnimationFrame(r));
+                        await sleep(0);
+
+                        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+                        if (!blob) return;
+
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `frame_${String(i).padStart(5, '0')}.png`;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+
+                        // give the browser a moment to process downloads
+                        await sleep(120);
+                    }
+
+                    for (let i = start; i < end; i++) {
+                        // eslint-disable-next-line no-await-in-loop
+                        await saveFrame(i);
+                    }
+                }
+                */
+                </script> -->
 
     </body>
 </html>
