@@ -4,9 +4,118 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
+
+        <style>
+            html, body { height: 100%; margin: 0; font-family: Verdana, sans-serif; }
+            /* Canvas sits fixed as a background layer */
+            canvas {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vw;
+                display: block;
+                z-index: 0;
+            }
+
+            /* Hero area that occupies the first viewport */
+            .hero {
+                position: relative;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1;
+            }
+
+            /* Overlay content centered inside the hero only */
+            .overlay {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                color: white;
+                -webkit-font-smoothing: antialiased;
+                pointer-events: none;
+            }
+            .overlay h1, .overlay p { pointer-events: auto; margin: 0.25rem 0; }
+            .overlay h1 { font-size: 3rem; letter-spacing: 0.02em; }
+            .overlay p { font-size: 1.25rem; opacity: 0.95; }
+
+            /* Main content that scrolls beneath the hero */
+            main.content {
+                position: relative;
+                z-index: 2;
+                background: #fff;
+                color: #111;
+            }
+            .projects {
+                max-width: 1100px;
+                margin: 0 auto;
+                padding: 48px 20px;
+            }
+            .project {
+                background: #f7f7f7;
+                border-radius: 8px;
+                padding: 20px;
+                margin: 16px 0;
+                box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+            }
+            .project h2 { margin: 0 0 8px 0; }
+        </style>
+
     </head>
     <body>
-        <h1>Barkai Lazimy</h1>
-        
+        <canvas id="canvas"> </canvas>
+
+        <section class="hero">
+            <div class="overlay">
+                <h1>BARKAI LAZIMY</h1>
+                <p class="subtitle">Engineering Student</p>
+            </div>
+        </section>
+
+        <main class="content">
+            <div class="projects">
+                <section class="project">
+                    <h2>Project One</h2>
+                    <p>Short description of project one. Technologies used: WebGPU, JavaScript.</p>
+                </section>
+                <section class="project">
+                    <h2>Project Two</h2>
+                    <p>Short description of project two. Link, demo, and short notes go here.</p>
+                </section>
+                <section class="project">
+                    <h2>Project Three</h2>
+                    <p>Short description of project three. Add as many as you like.</p>
+                </section>
+            </div>
+        </main>
+
+        <script type="module">
+            import createBackground from 'https://bitarmada.github.io/webgpunet/background.js';
+            const canvas = document.getElementById('canvas');
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerWidth;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            var stuff = await createBackground(canvas,400);
+            stuff.update();
+
+            function loop(){
+                stuff.update();
+                requestAnimationFrame(loop);
+            }
+            loop();
+
+            await stuff.activate(200,300,1);
+         </script>
+
     </body>
 </html>
