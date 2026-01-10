@@ -153,7 +153,7 @@
         <section class="hero">
             <div class="overlay">
                 <h1>BARKAI LAZIMY</h1>
-                <p class="subtitle">Engineering Student</p>
+                <p class="subtitle">Engineering Student | University of Wisconsin Madison</p>
                 <a class="corner-link" href="#projects" title="See this canvas project">
                     <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.9)" stroke-width="1.2" fill="rgba(255,255,255,0.02)" />
@@ -192,19 +192,27 @@
             resize();
             window.addEventListener('resize', resize);
 
-            var stuff = await createBackground(canvas,400);
-            stuff.update();
-
-            function loop(){
+           if (true){
+                const ctx = canvas.getContext('2d');
+                var img = new Image();
+                img.src = 'https://bitarmada.github.io/webgpunet/background2.png';
+                ctx.drawImage(img, 0,0, canvas.width, canvas.height);
+           }
+           else{ 
+                var stuff = await createBackground(canvas,400);
                 stuff.update();
-                requestAnimationFrame(loop);
-            }
-            loop();
 
-            await stuff.activate(200,300,1);
-            setInterval(async () => {
+                function loop(){
+                    stuff.update();
+                    requestAnimationFrame(loop);
+                }
+                loop();
+
                 await stuff.activate(200,300,1);
-            }, 1000*5);
+                setInterval(async () => {
+                    await stuff.activate(200,300,1);
+                }, 1000*5);
+        }
          </script>
 
     </body>
