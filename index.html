@@ -5,8 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
 
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
         <style>
-            html, body { height: 100%; margin: 0; font-family: Verdana, sans-serif; }
+            html, body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: #050507; }
             /* Canvas sits fixed as a background layer */
             canvas {
                 position: fixed;
@@ -41,28 +43,105 @@
                 -webkit-font-smoothing: antialiased;
                 pointer-events: none;
             }
-            .overlay h1, .overlay p { pointer-events: auto; margin: 0.25rem 0; }
-            .overlay h1 { font-size: 3rem; letter-spacing: 0.02em; }
-            .overlay p { font-size: 1.25rem; opacity: 0.95; }
+            .overlay h1, .overlay p { pointer-events: auto; margin: 0.25rem 0;}
+            .overlay h1 {
+                font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+                font-weight: 300;
+                font-size: clamp(2.25rem, 6vw, 4rem);
+                letter-spacing: 0.30em;
+                margin-bottom: 8px;
+                text-transform: none;
+                text-shadow: 0 6px 18px rgba(0,0,0,0.6);
+            }
+            .overlay p { font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 1.1rem; opacity: 0.95; }
+
+            /* Scroll indicator */
+            .scroll-indicator {
+                position: absolute;
+                left: 50%;
+                bottom: 28px;
+                transform: translateX(-50%);
+                width: 36px;
+                height: 56px;
+                border-radius: 24px;
+                border: 2px solid rgba(255,255,255,0.85);
+                display: flex;
+                align-items: flex-start;
+                justify-content: center;
+                padding-top: 8px;
+                box-sizing: border-box;
+                opacity: 0.95;
+                pointer-events: none;
+            }
+            .scroll-indicator .arrow {
+                width: 8px;
+                height: 8px;
+                border-right: 2px solid rgba(255,255,255,0.95);
+                border-bottom: 2px solid rgba(255,255,255,0.95);
+                transform: rotate(45deg);
+                margin-top: 6px;
+                animation: scroll-bounce 1.6s infinite;
+            }
+            @keyframes scroll-bounce {
+                0% { transform: translateY(0) rotate(45deg); opacity: 0.9 }
+                50% { transform: translateY(10px) rotate(45deg); opacity: 1 }
+                100% { transform: translateY(0) rotate(45deg); opacity: 0.9 }
+            }
+
+            /* Corner project link */
+            .corner-link {
+                position: absolute;
+                top: 22px;
+                right: 22px;
+                display: inline-flex;
+                gap: 10px;
+                align-items: center;
+                padding: 10px 14px;
+                border-radius: 999px;
+                color: white;
+                text-decoration: none;
+                background: rgba(255,255,255,0.02);
+                border: 1px solid rgba(255,255,255,0.08);
+                backdrop-filter: blur(8px) saturate(120%);
+                box-shadow: 0 6px 24px rgba(0,0,0,0.45);
+                transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+                pointer-events: auto;
+            }
+            .corner-link:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 12px 40px rgba(0,0,0,0.55); }
+            .corner-link .icon {
+                width: 20px;
+                height: 20px;
+                display: inline-block;
+                flex: 0 0 20px;
+            }
+            .corner-link .text { font-size: 0.9rem; font-weight: 600; letter-spacing: 0.04em; }
+
+            
 
             /* Main content that scrolls beneath the hero */
             main.content {
                 position: relative;
                 z-index: 2;
-                background: #fff;
-                color: #111;
+                background: transparent;
+                color: #fff;
+                -webkit-font-smoothing: antialiased;
+                background: rgba(6,6,8,0.68);
+                backdrop-filter: blur(8px) saturate(120%);
             }
             .projects {
                 max-width: 1100px;
                 margin: 0 auto;
-                padding: 48px 20px;
+                padding: 48px 20px 96px 20px;
             }
             .project {
-                background: #f7f7f7;
-                border-radius: 8px;
-                padding: 20px;
-                margin: 16px 0;
-                box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+                background: rgba(6,6,8,0.68);
+                border-radius: 12px;
+                padding: 22px;
+                margin: 18px 0;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+                border: 1px solid rgba(255,255,255,0.04);
+                backdrop-filter: blur(8px) saturate(120%);
+                color: #e9eef8;
             }
             .project h2 { margin: 0 0 8px 0; }
         </style>
@@ -75,6 +154,14 @@
             <div class="overlay">
                 <h1>BARKAI LAZIMY</h1>
                 <p class="subtitle">Engineering Student</p>
+                <a class="corner-link" href="#projects" title="See this canvas project">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.9)" stroke-width="1.2" fill="rgba(255,255,255,0.02)" />
+                        <path d="M8 12l2.5 2.5L16 9" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.95"/>
+                    </svg>
+                    <span class="text">See this project</span>
+                </a>
+                <div class="scroll-indicator" aria-hidden="true"><span class="arrow"></span></div>
             </div>
         </section>
 
@@ -115,6 +202,9 @@
             loop();
 
             await stuff.activate(200,300,1);
+            setInterval(async () => {
+                await stuff.activate(200,300,1);
+            }, 1000*5);
          </script>
 
     </body>
