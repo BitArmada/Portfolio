@@ -60,7 +60,7 @@
             .overlay h1 {
                 font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
                 /* font-weight: 800; */
-                font-weight: 3000;
+                font-weight: 300;
                 font-size: clamp(2.25rem, 6vw, 4rem);
                 /* letter-spacing: 0.06em; */
                 letter-spacing: 0.30em;
@@ -154,18 +154,49 @@
                 max-width: 1100px;
                 margin: 0 auto;
                 padding: 48px 20px 96px 20px;
+                display: grid;
+                gap: 20px;
             }
+
+            /* Base project card */
             .project {
-                background: rgba(6,6,8,0.68);
+                background: rgba(6,6,8,0.52);
                 border-radius: 12px;
-                padding: 22px;
-                margin: 18px 0;
-                box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+                padding: 20px;
+                margin: 0;
+                box-shadow: 0 8px 30px rgba(0,0,0,0.5);
                 border: 1px solid rgba(255,255,255,0.04);
                 backdrop-filter: blur(8px) saturate(120%);
                 color: #e9eef8;
+                overflow: hidden;
             }
-            .project h2 { margin: 0 0 8px 0; }
+            .project h2 { margin: 0 0 8px 0; font-size: 1.4rem; }
+            .project .meta { font-size: 0.95rem; color: rgba(233,238,248,0.85); margin-bottom: 12px; }
+            .project .project-grid { display: grid; gap: 16px; align-items: center; }
+
+            /* Layout variants */
+            .project.layout-left .project-grid { grid-template-columns: 1fr 1.25fr; }
+            .project.layout-right .project-grid { grid-template-columns: 1.25fr 1fr; }
+            .project.layout-full .project-grid { grid-template-columns: 1fr; }
+            .project.layout-gallery .project-grid { grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); }
+
+            .project .media { width: 100%; height: 100%; display:block; border-radius: 8px; overflow:hidden; }
+            .project .media img { width:100%; height:100%; object-fit:cover; display:block; }
+
+            .project .content { padding: 4px 6px; }
+            .project p { margin: 0 0 12px 0; color: rgba(233,238,248,0.88); line-height: 1.5; }
+
+            .project .buttons { display:flex; gap:10px; flex-wrap:wrap; }
+            .btn { background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #fff; padding: 8px 12px; border-radius:8px; text-decoration:none; font-weight:600; font-size:0.92rem; transition: transform .12s ease, background .12s ease; }
+            .btn:hover { transform: translateY(-3px); background: rgba(255,255,255,0.04); }
+            .btn.primary { background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); border-color: rgba(255,255,255,0.14); }
+
+            /* Responsive adjustments */
+            @media (max-width: 880px) {
+                .project.layout-left .project-grid,
+                .project.layout-right .project-grid { grid-template-columns: 1fr; }
+                .project { padding: 16px; }
+            }
         </style>
 
     </head>
@@ -188,18 +219,75 @@
         </section>
 
         <main class="content">
-            <div class="projects">
-                <section class="project">
-                    <h2>Project One</h2>
-                    <p>Short description of project one. Technologies used: WebGPU, JavaScript.</p>
+            <div class="projects" id="projects">
+                <!-- Card: image left, text right -->
+                <section class="project layout-left">
+                    <div class="project-grid">
+                        <div class="media"><img src="https://via.placeholder.com/720x480.png?text=Project+1+Image" alt="Project 1 screenshot"></div>
+                        <div class="content">
+                            <h2>Interactive WebGPU</h2>
+                            <div class="meta">WebGPU · GLSL · JavaScript</div>
+                            <p>A real-time procedural background and interactive demo showcasing GPU-driven particles and shading. Includes adjustable parameters and performance tuning.</p>
+                            <div class="buttons">
+                                <a class="btn" href="#" target="_blank">GitHub</a>
+                                <a class="btn primary" href="#" target="_blank">Live Demo</a>
+                                <a class="btn" href="#">Learn more</a>
+                            </div>
+                        </div>
+                    </div>
                 </section>
-                <section class="project">
-                    <h2>Project Two</h2>
-                    <p>Short description of project two. Link, demo, and short notes go here.</p>
+
+                <!-- Card: image right, text left -->
+                <section class="project layout-right">
+                    <div class="project-grid">
+                        <div class="content">
+                            <h2>Data Viz Dashboard</h2>
+                            <div class="meta">React · D3 · Accessible</div>
+                            <p>A responsive dashboard with rich, interactive visualizations. Multiple views, exportable CSVs, and accessible controls for keyboard users.</p>
+                            <div class="buttons">
+                                <a class="btn" href="#">Source</a>
+                                <a class="btn primary" href="#">Open Site</a>
+                                <a class="btn" href="#">Learn more</a>
+                            </div>
+                        </div>
+                        <div class="media"><img src="https://via.placeholder.com/720x480.png?text=Project+2+Image" alt="Project 2 screenshot"></div>
+                    </div>
                 </section>
-                <section class="project">
-                    <h2>Project Three</h2>
-                    <p>Short description of project three. Add as many as you like.</p>
+
+                <!-- Card: gallery layout -->
+                <section class="project layout-gallery">
+                    <div class="project-grid">
+                        <div class="media"><img src="https://via.placeholder.com/600x400.png?text=Gallery+1" alt="Gallery 1"></div>
+                        <div class="media"><img src="https://via.placeholder.com/600x400.png?text=Gallery+2" alt="Gallery 2"></div>
+                        <div class="media"><img src="https://via.placeholder.com/600x400.png?text=Gallery+3" alt="Gallery 3"></div>
+                        <div class="content">
+                            <h2>Armor Optimization</h2>
+                            <div class="meta">CSS · Web Animations</div>
+                            <p></p>
+                            <div class="buttons">
+                                <a class="btn" href="#">GitHub</a>
+                                <a class="btn primary" href="#">Playground</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Card: full-bleed background image with overlay text -->
+                <section class="project layout-full">
+                    <div class="project-grid">
+                        <div class="media" style="">
+                            <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXeC9Zvhrs2Ge61SOEEwa4shth51Vo3M6T_iLhxSoP7V2tcYRNIUVFWISqgOeAJiLxq5ok6IIFU2nRbJ9U4YbHMvkQE7oCJw0syaFnF0ZT7v3wNYNqJm1oi0dXPmufHC4shCRrrMxA?key=KHrMDpzEVaq71VAq6JfwoA" alt="Project hero image">
+                        </div>
+                        <div class="content">
+                            <h2>Security System with Real-Time Gun Detection using Computer Vision</h2>
+                            <div class="meta">Design · Frontend</div>
+                            <p>A showcase page with rich media and product highlights. Designed to be clean, readable, and fast-loading across devices.</p>
+                            <div class="buttons">
+                                <a class="btn" href="#">Case Study</a>
+                                <a class="btn primary" href="#">View Site</a>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </div>
         </main>
@@ -218,7 +306,8 @@
             window.addEventListener('resize', setCanvasSquare);
 
             async function useVideoFallback() {
-                canvas.style.display = 'none';
+                // We'll draw the video onto the main canvas using nearest-neighbor scaling
+                // so pixels remain crisp immediately.
                 const video = document.createElement('video');
                 video.id = 'fallbackVideo';
                 video.src = './fallback.mp4';
@@ -227,12 +316,80 @@
                 video.autoplay = true;
                 video.playsInline = true;
                 video.preload = 'auto';
-                document.body.insertBefore(video, document.body.firstChild);
-                try { await video.play(); } catch (e) { /* autoplay may be blocked */ }
+                // keep the video element offscreen/hidden - we draw from it into the canvas
+                video.style.position = 'absolute';
+                video.style.left = '-9999px';
+                video.style.width = '400px';
+                video.style.height = '400px';
+                document.body.appendChild(video);
+
+                // make sure canvas is visible and sized to viewport
+                canvas.style.display = 'block';
+                canvas.style.position = 'fixed';
+                canvas.style.top = '0';
+                canvas.style.left = '0';
+                canvas.style.width = '100vw';
+                canvas.style.height = '100vh';
+                canvas.style.zIndex = '0';
+                // hint for crisp rendering
+                canvas.style.imageRendering = 'pixelated';
+
+                const ctx = canvas.getContext('2d');
+                ctx.imageSmoothingEnabled = false;
+
+                function resizeDrawCanvas() {
+                    const dpr = window.devicePixelRatio || 1;
+                    const w = Math.max(1, Math.round(window.innerWidth));
+                    const h = Math.max(1, Math.round(window.innerHeight));
+                    canvas.width = Math.round(w * dpr);
+                    canvas.height = Math.round(h * dpr);
+                    canvas.style.width = w + 'px';
+                    canvas.style.height = h + 'px';
+                    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                    ctx.imageSmoothingEnabled = false;
+                }
+
+                resizeDrawCanvas();
+                window.addEventListener('resize', resizeDrawCanvas);
+
+                // start drawing once we have metadata (video dimensions)
+                video.addEventListener('loadedmetadata', () => {
+                    // ensure playback
+                    try { video.play(); } catch (_) {}
+
+                    function draw() {
+                        // compute a cover scale (fill) while keeping integer-ish sizes for crisper pixels
+                        const vw = video.videoWidth || 400;
+                        const vh = video.videoHeight || 400;
+                        const cw = canvas.width / (window.devicePixelRatio || 1);
+                        const ch = canvas.height / (window.devicePixelRatio || 1);
+
+                        const scale = Math.max(cw / vw, ch / vh);
+                        // aim for integer pixel scaling when possible
+                        const drawW = Math.round(vw * scale);
+                        const drawH = Math.round(vh * scale);
+                        const dx = Math.round((cw - drawW) / 2);
+                        const dy = Math.round((ch - drawH) / 2);
+
+                        ctx.clearRect(0, 0, cw, ch);
+                        ctx.imageSmoothingEnabled = false;
+                        try {
+                            ctx.drawImage(video, 0, 0, vw, vh, dx, dy, drawW, drawH);
+                        } catch (e) {
+                            // drawing might fail if video not ready; ignore and continue
+                        }
+                        requestAnimationFrame(draw);
+                    }
+
+                    draw();
+                }, { once: true });
+
+                // attempt to play in case metadata already loaded
+                try { await video.play(); } catch (_) {}
             }
 
             async function initBackground() {
-                const hasGPU = !!navigator.gpu;
+                const hasGPU = false;//!!navigator.gpu;
                 if (!hasGPU) {
                     await useVideoFallback();
                     return;
