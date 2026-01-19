@@ -157,9 +157,10 @@
                 /* backdrop-filter: blur(20px) saturate(120%) brightness(2); */
             }
             .projects {
-                max-width: 1100px;
+                /* max-width: 1200px; */
+                /* max-width: 80%; */
                 margin: 0 auto;
-                padding: 48px 20px 96px 20px;
+                padding: 48px 30px 96px 30px;
                 display: grid;
                 gap: 20px;
             }
@@ -255,6 +256,27 @@
 
             .project .content { padding: 4px 6px; }
             .project p { margin: 0 0 12px 0; color: rgba(233,238,248,0.88); line-height: 1.5; }
+            
+            /* Expanded project layout for detailed multi-section projects */
+            .project.layout-expanded .project-grid { grid-template-columns: 1fr; }
+            .project.layout-expanded .content { padding: 0; }
+            .project-section { margin-bottom: 28px; }
+            .project-section:last-child { margin-bottom: 0; }
+            .project-section h3 { font-size: 1.15rem; margin: 0 0 12px 0; color: #fff; }
+            .project-media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+            .project-media-item { border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+            .project-media-item iframe { width: 100%; height: auto; aspect-ratio: 16/9; border: none; }
+            .project-media-item video { width: 100%; height: auto; display: block; }
+            .project-media-item img { width: 100%; height: auto; display: block; object-fit: contain; }
+            .project-media-item .caption { margin-top: 8px; width: 100%; text-align: center; }
+            
+            /* Three-column layout for projects with 3+ media items */
+            .project-section .project-media-grid:has(.project-media-item:nth-child(3)) { grid-template-columns: 1fr 1fr 1fr; }
+            
+            @media (max-width: 880px) {
+                .project-media-grid { grid-template-columns: 1fr; }
+                .project-section .project-media-grid:has(.project-media-item:nth-child(3)) { grid-template-columns: 1fr; }
+            }
 
             .project .buttons { display:flex; gap:10px; flex-wrap:wrap; }
             .btn { background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #fff; padding: 8px 12px; border-radius:8px; text-decoration:none; font-weight:600; font-size:0.92rem; transition: transform .12s ease, background .12s ease; }
@@ -340,6 +362,61 @@
                     </div>
                 </section>
 
+                <section class="project layout-left" id="">
+                    <div class="project-grid">
+                        <div>
+                            <div class="media"><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXcevTTEKB8VO0zVARxZ3GBcv0kn5mI94wy6fwm5dA-SkxueQZIPK6etvom9Riuritlih65wX5Gcw7a0lmYQ3bKQTNwzoouq3tooaP4RLcZVgABqC234PHAVp9KlD_iQ1Zm6X_7dbg?key=KHrMDpzEVaq71VAq6JfwoA" alt="Project 1 screenshot"></div>
+                            <div class="caption">screenshot of a test scene I rendered in the browser using my engine.</div>
+                        </div>
+                        <div class="content">
+                            <h2>Custom Graphics Engine using Ray Marching on the GPU</h2>
+                            <div class="meta">WebGPU · GLSL · JavaScript</div>
+                            <p>The goal of this project was to create a fully functional graphics engine based on ray marching that runs in real time in the browser using GPU compute shaders. As opposed to traditional algorithms, which use triangles (rasterization or raytracing), this engine uses signed distance functions to describe 3d shapes. This allows shapes with high levels of detail to be rendered without excessive memory usage or performance costs. To accomplish this, the engine uses a buffer that stores distance functions in a binary format and sends them to the GPU to be computed on a per-pixel basis. In environments where memory is limited or loading times must be short, like webpages, this technique is advantageous.</p>
+                            <br/>
+                            <p> All the shapes on screen were defined using mathematical functions rather than triangles. The reflections and diffuse lighting are computed using the same methods as traditional raytracers.</p>
+                            <div class="buttons">
+                                <a class="btn" href="https://github.com/BitArmada/spectre/" target="_blank">GitHub</a>
+                                <a class="btn primary" href="https://bitarmada.github.io/spectre/" target="_blank">Live Demo</a>
+                                <!-- <a class="btn" href="#">Learn more</a> -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Card: Echolocation algorithm and Audio simulation -->
+                <section class="project layout-expanded">
+                    <div class="project-grid">
+                        <div class="content">
+                            <h2>Echolocation Algorithm and Audio Simulation</h2>
+                            <div class="meta">JavaScript · WGSL · Python</div>
+                            
+                            <div class="project-section">
+                                <h3>Algorithm Development</h3>
+                                <p>I was inspired by echolocation in nature to create an algorithm that can reconstruct environments using only the reflections of acoustic waves. To develop this algorithm, I needed noise-free data of physically accurate acoustic reflections in many different environments. To accomplish this, I wrote a GPU-based numerical simulation of the classical wave equation from scratch. I used the data from this simulation to reconstruct the environments I had tested virtually. Eventually, I aim to expand this algorithm to three dimensions to map real-world environments.</p>
+                                <div class="project-media-grid">
+                                    <div class="project-media-item">
+                                        <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXcBNHmiOCkc3myuF5Cjeyyz9vUmumQPOI2sFsQzAi0jWyJZax65z-DTMB5TPpgmA8RS3J9hErUsD0x9ijxFZgv4YpqfX3aLg3yhPY5ggpPnrRjiXuVm3fnq7a8FtwsBxFVAYQlWfQ?key=KHrMDpzEVaq71VAq6JfwoA" alt="Sound wave simulation">
+                                        <div class="caption">Wave simulation</div>
+                                    </div>
+                                    <div class="project-media-item">
+                                        <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXcJssYXdB1QAz4hL9dG0RwY2lVlJwmUZudXDYeKlapJCaAtnXOyMpr-z_2UKHXM49oh9MQ5D_2TxSQV2vLIewQdluXKBcXjVxpLVAatMgxCG13Pob_1IIqCCdYM7zSPy-uL5g5N?key=KHrMDpzEVaq71VAq6JfwoA" alt="Reconstructed environment">
+                                        <div class="caption">Raw wave Data</div>
+                                    </div>
+                                    <div class="project-media-item">
+                                        <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXe7MINrQsfKdQUjBSFdhQS3Xl_PmVbqLWlZf0flPDYyigiS84PguacZq_awXZhSyWNe_JnuD3USfw3nINH9DlGTZwKfxXrcyhNR2v9Bb2596QRhLhxgwgjJxLUFWfyBjHKADdKa4Q?key=KHrMDpzEVaq71VAq6JfwoA" alt="Algorithm visualization">
+                                        <div class="caption">Reconstruction</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="buttons">
+                                <a class="btn" href="#">GitHub</a>
+                                <a class="btn primary" href="#">Learn more</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Card: image left, text right -->
                 <section class="project layout-left" id="background-project">
                     <div class="project-grid">
@@ -348,13 +425,13 @@
                             <div class="caption">Real-time neural network simulation</div>
                         </div>
                         <div class="content">
-                            <h2>Interactive WebGPU</h2>
+                            <h2>Interactive WebGPU Neuron Simulation</h2>
                             <div class="meta">WebGPU · GLSL · JavaScript</div>
-                            <p>A real-time procedural demo showcasing an excitable media that replicates the behavior of neurons by learning via the Hebian Learning principle. This project was built using WebGPU and GLSL compute shaders to simulate thousands of neurons in real time.</p>
+                            <p>A real-time procedural demo showcasing an excitable media that replicates the behavior of neurons by learning via the Hebbian Learning principle. This project was built using WebGPU and GLSL to simulate thousands of neurons in the browser, all in real time. Unlike a traditional neural network, this model continuously models activation potential over time, allowing neurons to fire at different times. Initially, the randomly connected network exhibits chaotic activation patterns as each neuron's activation potential spikes and triggers surrounding neurons. For a short period after each neuron fires, it learns by strengthening connections with other neurons that have recently fired, similar to the behavior of real human neurons. Eventually, the network becomes fully connected, and clear activation waves begin to form, similar to waves observed in human brains. While this model is extremely oversimplified with much lower connectivity than the human brain, models like this may help us create more complex machine learning algorithms. Similar models with higher connectivity and more complex learning principles could learn continuously as they operate, as opposed to traditional one-time training.</p>
                             <div class="buttons">
-                                <a class="btn" href="#" target="_blank">GitHub</a>
+                                <a class="btn" href="https://github.com/BitArmada/webgpunet" target="_blank">GitHub</a>
                                 <a class="btn primary" href="https://bitarmada.github.io/webgpunet/" target="_blank">Live Demo</a>
-                                <a class="btn" href="#">Learn more</a>
+                                <!-- <a class="btn" href="#">Learn more</a> -->
                             </div>
                         </div>
                     </div>
@@ -363,13 +440,13 @@
                 <!-- Card: gallery layout -->
                 <section class="project layout-gallery">
                     <div class="project-grid">
-                        <div class="media"><img src="https://via.placeholder.com/600x400.png?text=Gallery+1" alt="Gallery 1"></div>
-                        <div class="media"><img src="https://via.placeholder.com/600x400.png?text=Gallery+2" alt="Gallery 2"></div>
-                        <div class="media"><img src="https://via.placeholder.com/600x400.png?text=Gallery+3" alt="Gallery 3"></div>
+                        <div class="media"><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdpxO5bT-MkrwnHaB86aYlms_FYwalVop2yOuKRPoFO-guMiG3OaCpZvkdAlR0LXmRe1CYVH6vqmEll0PWYgI8swJkO39UndIsllar_eij0sjzRSNlPLIuFeqNGODhCuywcAXWWyQ?key=KHrMDpzEVaq71VAq6JfwoA" alt="Gallery 1"></div>
+                        <div class="media"><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXcP1gOY9WzYK6SJDrd0coXAnCPZg5KAulwJ3DIbT5Agh3RxyR_5PFPMUhjvRomy0yp9ZufGf7QvvZWL4cUY76NZwJtjFhtIkcroKVVBpytgTHvX9auUkeo7yBahnrbQoRypyfu1KA?key=KHrMDpzEVaq71VAq6JfwoA" alt="Gallery 2"></div>
+                        <div class="media"><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXfyyOaId-KlcyyIVlE2-8VffrUNjzK4wkD1lrYl7q5wRkofi9XPlJ21J74jDUoWbKaAdkSrw5q1a0ZnWgJDo5NjTLN_m_tzrL3LUwKdOfGXXH73sqj-k-sXyejU9DUHNnLpGDg02g?key=KHrMDpzEVaq71VAq6JfwoA" alt="Gallery 3"></div>
                         <div class="content">
                             <h2>Armor Optimization</h2>
-                            <div class="meta">CSS · Web Animations</div>
-                            <p></p>
+                            <div class="meta">Simulation · PyTorch · Python</div>
+                            <p>Traditional structural topology optimization can only optimize for strength and material consumption, but struggles when it comes to optimizing shapes designed to fracture. To optimize the internal geometry of armor so that it could absorb the impact of projectiles, I created a unique spring-based fracture model using PyTorch. The model turns the discontinuous fracture problem into a differentiable problem that allows stiffness gradients to be computed. Gradient descent using the stiffness derivatives with respect to a specified loss function (in this case, energy dissipation) yields optimized topologies.</p>
                             <div class="buttons">
                                 <a class="btn" href="#">GitHub</a>
                                 <a class="btn primary" href="#">Playground</a>
@@ -378,19 +455,57 @@
                     </div>
                 </section>
 
-                <!-- Card: full-bleed background image with overlay text -->
-                <section class="project layout-full">
+                <!-- Card: Security System with Real-Time Gun Detection -->
+                <section class="project layout-expanded">
                     <div class="project-grid">
-                        <div class="media" style="">
-                            <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXeC9Zvhrs2Ge61SOEEwa4shth51Vo3M6T_iLhxSoP7V2tcYRNIUVFWISqgOeAJiLxq5ok6IIFU2nRbJ9U4YbHMvkQE7oCJw0syaFnF0ZT7v3wNYNqJm1oi0dXPmufHC4shCRrrMxA?key=KHrMDpzEVaq71VAq6JfwoA" alt="Project hero image">
-                        </div>
                         <div class="content">
                             <h2>Security System with Real-Time Gun Detection using Computer Vision</h2>
-                            <div class="meta">Design · Frontend</div>
-                            <p>A showcase page with rich media and product highlights. Designed to be clean, readable, and fast-loading across devices.</p>
+                            <div class="meta">Machine Learning · Hardware · YOLOv8 · Python</div>
+                            
+                            <div class="project-section">
+                                <h3>Prototype Development</h3>
+                                <p>I designed and built a prototype security device utilizing a combination of machine learning and custom hardware. The device used a microcontroller and webcam to process video using a YOLOv8 real-time object detection model. I wrote a Python script that locks the 3d printed turret onto any threats in order to engage with deterrent mechanisms.</p>
+                                <div class="project-media-grid">
+                                    <div class="project-media-item">
+                                        <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXd28_kNinUgBxCXkt_dWLAr6B-WVIZ4ojUjPqry29aocxsP4N2Lpfss3uQ4PKD0SvC5unEEGtRdAYI4FTwqRGMkq0sZinZmJIC_8CyPSWc3XBz5vqn8n7M7KsnZmHRZW_rb-l3Q?key=KHrMDpzEVaq71VAq6JfwoA" alt="Design process">
+                                        <div class="caption">Design</div>
+                                    </div>
+                                    <div class="project-media-item">
+                                        <video controls preload="metadata">
+                                            <source src="./assets/prototype-demo.mp4" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                        <div class="caption">Prototype in action</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="project-section">
+                                <h3>Business Plan & Competition</h3>
+                                <p>In addition to the prototype, I created a detailed business plan for the product, leveraging NVIDIA GPUs for edge computing solutions. This comprehensive plan won first place in the state DECA innovation plan competition. This experience gave me valuable insights into the business models and perspectives of NVIDIA customers who implement edge computing at scale, and demonstrated the commercial viability of intelligent security solutions.</p>
+                            </div>
+                            
+                            <div class="project-section">
+                                <h3>Design & Rendering</h3>
+                                <p>I created detailed 3D renderings and visualizations in Blender for the product proposal, showcasing the final design and form factor for stakeholders and competition judges.</p>
+                                <div class="project-media-grid">
+                                    <div class="project-media-item">
+                                        <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdxFskyLkx34iwEecIFlS6Fm99iimKgIEQyzibjitcq82vP22mHQoicDuMAKF6jMtVLdRDsqe9ZjvtBu-B8PL0HwXz46NP-mEFaFEBW7gxo5ZKZx2fb3TCKEaQLjRd5qkDPn9ZR?key=KHrMDpzEVaq71VAq6JfwoA" alt="3D turret isometric view">
+                                        <div class="caption">Isometric view</div>
+                                    </div>
+                                    <div class="project-media-item">
+                                        <img src="./assets/exploded3.png" alt="3D turret front view">
+                                        <div class="caption">Front view</div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            
                             <div class="buttons">
                                 <a class="btn" href="#">Case Study</a>
-                                <a class="btn primary" href="#">View Site</a>
+                                <a class="btn" href="https://bitarmada.github.io/Portfolio/assets/SecuritySystem.pdf" target="_blank">Business Plan</a>
+                                <a class="btn primary" href="#">GitHub</a>
                             </div>
                         </div>
                     </div>
