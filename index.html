@@ -283,6 +283,27 @@
             .btn:hover { transform: translateY(-3px); background: rgba(255,255,255,0.04); }
             .btn.primary { background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); border-color: rgba(255,255,255,0.14); }
 
+            /* Achievement badge */
+            .achievement-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                margin-top: 10px;
+                padding: 8px 14px;
+                background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 200, 0, 0.08));
+                border: 1px solid rgba(255, 215, 0, 0.3);
+                border-radius: 8px;
+                font-size: 0.85rem;
+                font-weight: 600;
+                color: rgba(255, 215, 0, 0.95);
+                backdrop-filter: blur(8px) saturate(120%);
+                box-shadow: 0 4px 12px rgba(255, 215, 0, 0.1);
+            }
+            .achievement-badge::before {
+                content: "🏆";
+                font-size: 1rem;
+            }
+
             /* Responsive adjustments */
             @media (max-width: 880px) {
                 .project.layout-left .project-grid,
@@ -417,6 +438,27 @@
                     </div>
                 </section>
 
+                <section class="project layout-right">
+                    <div class="project-grid">
+                        <div class="content">
+                            <h2>Quantum Schrodinger Equation simulation on the GPU</h2>
+                            <div class="meta">Optimization · PyTorch · Fluid Dynamics</div>
+                            <p>After experimenting with the relatively new WebGPU compute shaders, I created a quantum simulation that runs entirely in the browser from scratch. This served as a useful learning tool that helped me gain an intuition for the complex math of partial differential equations.
+
+Right is a screenshot of the simulation; the interesting visual checkerboarding pattern is due to numerical instabilities caused by large time steps and the simple Euler's method approximation. I was able to avoid these instabilities with smaller time steps, but I find these error patterns fascinating.
+</p>
+                            <!-- <div class="buttons">
+                                <a class="btn" href="https://github.com/BitArmada/FluidOptimization" target="_blank">GitHub</a>
+                                <a class="btn" href="https://github.com/BitArmada/FluidOptimization/blob/main/README.md">Learn more</a>
+                            </div> -->
+                        </div>
+                        <div>
+                            <div class="media"><img src="./assets/quantum.png" alt="Quantum Simulation - Unstable"></div>
+                            <div class="caption">Quantum Schrodinger Equation simulation with numerical errors developing</div>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Card: image left, text right -->
                 <section class="project layout-left" id="background-project">
                     <div class="project-grid">
@@ -461,6 +503,7 @@
                         <div class="content">
                             <h2>Security System with Real-Time Gun Detection using Computer Vision</h2>
                             <div class="meta">Machine Learning · Hardware · YOLOv8 · Python</div>
+                            <div class="achievement-badge">1st Place - State DECA Entrepreneurship Innovation Plan Competition</div>
                             
                             <div class="project-section">
                                 <h3>Prototype Development</h3>
@@ -510,6 +553,60 @@
                         </div>
                     </div>
                 </section>
+
+                <section class="project layout-expanded">
+                    <div class="project-grid">
+                        <div class="content">
+                            <h2>Electrochemical Carbon Capture Device - Business Plan and Prototype</h2>
+                            <div class="meta">Electrochemistry · Hardware · CAD · Blender</div>
+                            
+                            <div class="project-section">
+                                <h3>Prototype Development</h3>
+                                <p>I designed and built a prototype security device utilizing a combination of machine learning and custom hardware. The device used a microcontroller and webcam to process video using a YOLOv8 real-time object detection model. I wrote a Python script that locks the 3d printed turret onto any threats in order to engage with deterrent mechanisms.</p>
+                                <div class="project-media-grid">
+                                    <div class="project-media-item">
+                                        <img src="./assets/DAC.png" alt="3D turret isometric view">
+                                        <div class="caption">Isometric view</div>
+                                    </div>
+                                    <div class="project-media-item">
+                                        <img src="./assets/PCdiagram.PNG" alt="3D turret isometric view">
+                                        <div class="caption">Isometric view</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="project-section">
+                                <h3>Business Plan & Competition</h3>
+                                <p>In addition to the prototype, I created a detailed business plan for the product, leveraging NVIDIA GPUs for edge computing solutions. This comprehensive plan won first place in the state DECA innovation plan competition. This experience gave me valuable insights into the business models and perspectives of NVIDIA customers who implement edge computing at scale, and demonstrated the commercial viability of intelligent security solutions.</p>
+                            </div>
+                            
+                            <div class="project-section">
+                                <h3>Design & Rendering</h3>
+                                <p>I created detailed 3D renderings and visualizations in Blender for the product proposal, showcasing the final design and form factor for stakeholders and competition judges.</p>
+                                <div class="project-media-grid">
+                                    <div class="project-media-item">
+                                        <img src="./assets/DAC.png" alt="3D turret isometric view">
+                                        <div class="caption">Isometric view</div>
+                                    </div>
+                                    <div class="project-media-item">
+                                        <img src="./assets/PCdiagram.PNG" alt="3D turret isometric view">
+                                        <div class="caption">Isometric view</div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            
+                            <div class="buttons">
+                                <a class="btn" href="#">Case Study</a>
+                                <a class="btn" href="https://bitarmada.github.io/Portfolio/assets/SecuritySystem.pdf" target="_blank">Business Plan</a>
+                                <a class="btn primary" href="#">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                    <!-- Card: Carbon Capture -->
             </div>
         </main>
 
