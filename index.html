@@ -395,6 +395,28 @@
                     </div>
                 </section>
 
+                <section class="project layout-right" id="layer-optimization">
+                    <div class="project-grid">
+                        <div class="content">
+                            <!-- Strength Optimized Micro Non-planar Slicing Algorithm for Anisotropic 3d Printing -->
+                            <h2>Layer Optimization for Anisotropic 3D Printing</h2>
+                            <div class="meta">JAX · Python · Finite Element Method · Optimization</div>
+                            <p>Traditional planar fused filament 3d printing produces parts that are weaker in certain directions (anisotropic), which often leads to failure under mechanical loads. This algorithm analyzes the structure of a part to generate an optimal layer pattern that is significantly stronger. It first analyzes the parts deformation using a custom differentiable anisotropic Finite Element Method simulation implemented in JAX. The direction of the filament at every element is parameterized to a layer angle field, which is then optimized for minimum compliance using Stochastic Gradient Descent (SGD) on the FEM gradients. The optimal layer angle field is then passed into the slicing algorithm, which produces layer lines that follow the specified angles and smoothly interpolate between elements. A major goal of this project is to design stronger parts that can be printed on any traditional comercial 3d printer, rather than experimental non-planar printers which can print at any angle. This algorithm can constrain the optimized angles to accommodate micro non-planar printing, taking advantage of the z-axis to create tilted layer lines.</p>
+                            <div class="buttons">
+                                <a class="btn" href="https://github.com/BitArmada/FluidOptimization" target="_blank">GitHub</a>
+                                <a class="btn" href="https://github.com/BitArmada/FluidOptimization/blob/main/README.md">Learn more</a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="media"><img src="./assets/PiInterpolated.png" alt="Layer optimization for anisotropic 3D printing"></div>
+                            <div class="caption">Optimized layer lines for an example part under vertical loading</div>
+                        </div>
+                    </div>
+                </section>
+
+
+
+
                 <section class="project layout-left" id="Graphics-Engine">
                     <div class="project-grid">
                         <div>
