@@ -395,6 +395,25 @@
                     </div>
                 </section>
 
+                <section class="project layout-left" id="Aircraft-Optimization">
+                    <div class="project-grid">
+                        <div>
+                            <div class="media"><img src="./assets/aircraftdesign.png" alt="aircraft design visualization"></div>
+                            <div class="caption">Some data visualizations for the aircraft optimization project</div>
+                        </div>
+                        <div class="content">
+                            <h2>Aircraft Design for Payload Optimization using Genetic Evolutionary Algorithm</h2>
+                            <div class="meta">Python · Genetic Algorithm · Aerodynamics</div>
+                            <p>This algorithm uses publicly available wind-tunnel data on thousands of airfoil geometries to evolve optimally efficient flying-wing aircraft. Originally designed for the SAE aero competition, in which aircraft are scored by the number of cylindrical water bottles they can carry. This algorithm simulates thousands of initially random aircraft designs and selects those with the best flight performance and payload capacity. The selected aircraft designs are then mutated and mixed to form future generations, and the process continues until convergence on an optimal solution. The simulation can accommodate many different airfoils along the wingspan and characterizes important features like passive stability and bending moments along the wing in addition to lift, drag, payload, and more.</p>
+                            <div class="buttons">
+                                <!-- <a class="btn" href="https://github.com/BitArmada/spectre/" target="_blank">GitHub</a>
+                                <a class="btn primary" href="https://bitarmada.github.io/spectre/" target="_blank">Live Demo</a> -->
+                                <!-- <a class="btn" href="#">Learn more</a> -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <section class="project layout-right" id="layer-optimization">
                     <div class="project-grid">
                         <div class="content">
@@ -403,8 +422,8 @@
                             <div class="meta">JAX · Python · Finite Element Method · Optimization</div>
                             <p>Traditional planar fused filament 3d printing produces parts that are weaker in certain directions (anisotropic), which often leads to failure under mechanical loads. This algorithm analyzes the structure of a part to generate an optimal layer pattern that is significantly stronger. It first analyzes the parts deformation using a custom differentiable anisotropic Finite Element Method simulation implemented in JAX. The direction of the filament at every element is parameterized to a layer angle field, which is then optimized for minimum compliance using Stochastic Gradient Descent (SGD) on the FEM gradients. The optimal layer angle field is then passed into the slicing algorithm, which produces layer lines that follow the specified angles and smoothly interpolate between elements. A major goal of this project is to design stronger parts that can be printed on any traditional comercial 3d printer, rather than experimental non-planar printers which can print at any angle. This algorithm can constrain the optimized angles to accommodate micro non-planar printing, taking advantage of the z-axis to create tilted layer lines.</p>
                             <div class="buttons">
-                                <a class="btn" href="https://github.com/BitArmada/FluidOptimization" target="_blank">GitHub</a>
-                                <a class="btn" href="https://github.com/BitArmada/FluidOptimization/blob/main/README.md">Learn more</a>
+                                <a class="btn" href="https://colab.research.google.com/drive/1zgQJcK2wm-Z9ENt7ayJeslgkw-oHlrlg?usp=sharing" target="_blank">Colab Notebook</a>
+                                <!-- <a class="btn" href="https://github.com/BitArmada/FluidOptimization/blob/main/README.md">Learn more</a> -->
                             </div>
                         </div>
                         <div>
