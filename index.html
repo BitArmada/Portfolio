@@ -357,7 +357,7 @@
             <div class="profile-card">
                 <div class="profile-photo"><img src="./assets/profile.jpg" alt="Profile photo"></div>
                 <div class="profile-name">Barkai Lazimy</div>
-                <div class="profile-details">Engineering Student — UW Madison<br>Math & Computer enthusiast</div>
+                <div class="profile-details">Student — UW Madison<br>Engineering Physics & Mathematics</div>
                     <div class="contact-list">
                         <a class="contact-link" href="blazimy@wisc.edu" title="Email">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 6.5v11c0 .8.7 1.5 1.5 1.5h15c.8 0 1.5-.7 1.5-1.5v-11C21 5.7 20.3 5 19.5 5h-15C3.7 5 3 5.7 3 6.5z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 6l-9 6L3 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -373,7 +373,7 @@
             <div class="about-separator" style="width:1px; min-height:120px;"></div>
             <div class="about-bio">
                 <h3>About me</h3>
-                <p>I am a highly motivated and creative thinker who loves math and science. When I am not busy studying engineering at UW Madison I build independant projects using AI algorithms, GPU-programing, biology, electrochemistry, physics simulations and more ( like this website ) . I hope to use optimization and mathematics to engineer solutions to the worlds biggest problems.</p>
+                <p>I am a highly motivated and creative thinker who loves math and science. When I am not busy studying engineering at UW-Madison, I build independent projects using AI algorithms, GPU programming, Engineering, electrochemistry, physics simulations, and more. I hope to use optimization and mathematics to engineer solutions to the world's biggest problems.</p>
                 <!-- <p>Currently studying engineering at UW Madison. I like exploring WebGPU, shaders and creative coding workflows.</p> -->
                 <div class="about-actions">
                     <a class="btn" href="./assets/Resume.pdf" target="_blank">Resume</a>
@@ -404,6 +404,27 @@
                     </div>
                 </section>
 
+                <section class="project layout-gallery" id="global-path-optimization">
+                    <div class="project-grid">
+                        <div class="content">
+                            <h2>Path Generation for Autonomous Aircraft in Time-Dependent Flow Fields</h2>
+                            <div class="meta">Optimization · Autonomous Vehicles · Fluid Dynamics</div>
+                            <p>An Algorithm that incorporates global hourly wind data to generate the fastest routes between any points on Earth using a field-based LSF approach. The algorithm creates a field of reachable points across the Earth that is advected at every iteration with the time-dependent field and expanded using the aircraft's thrust parameters. The optimal path is traced using the gradient of the reachable time field. This algorithm solves a variation of the famous problem in control and optimization originally posed by Ernst Zermelo in 1931 for airship navigation. Like Zermelo, I designed this algorithm to find optimal paths for novel solar-powered, hydrogen airships. Pictured are the optimized routes between major global shipping hubs at various altitudes. Also pictured is the 3D plot of one route from LA to Shenzhen in 16.08 Hours for a simulated hydrogen airship. All simulations were conducted using real hourly weather data from June 2025, when the jet stream is weakest for a lower bound on travel time estimates.</p>
+                            </p><div class="buttons">
+                                <a class="btn" href="./airship_interactive_3d_plot.html">View Interactive 3D Plot</a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="media"><img src="./assets/Optimal_Flight_Paths.png" alt="Optimal flight paths vs altitude"></div>
+                            <div class="caption">Path optimization for autonomous aircraft in time-dependent flow fields</div>
+                        </div>
+                        <div>
+                            <div class="media"><img src="./assets/global_path_label.png" alt="Optimal flight path LA to Shenzhen"></div>
+                            <div class="caption">LA to Shenzhen in 16.08 Hours</div>
+                        </div>
+                    </div>
+                </section>
+
                 <section class="project layout-left" id="Aircraft-Optimization">
                     <div class="project-grid">
                         <div>
@@ -423,23 +444,19 @@
                     </div>
                 </section>
 
-                <section class="project layout-gallery" id="global-path-optimization">
+                <section class="project layout-gallery" id="bird-song-generator">
                     <div class="project-grid">
                         <div class="content">
-                            <h2>Path Generation for Autonomous Aircraft in Time-Dependent Flow Fields</h2>
-                            <div class="meta">Optimization · Autonomous Vehicles · Fluid Dynamics</div>
-                            <p>An Algorithm that incorporates global hourly wind data to generate the fastest routes between any points on Earth using a field-based LSF approach. The algorithm creates a field of reachable points across the Earth that is advected at every iteration with the time-dependent field and expanded using the aircraft's thrust parameters. The optimal path is traced using the gradient of the reachable time field. This algorithm solves a variation of the famous problem in control and optimization originally posed by Ernst Zermelo in 1931 for airship navigation. Like Zermelo, I designed this algorithm to find optimal paths for novel solar-powered, hydrogen airships. Pictured are the optimized routes between major global shipping hubs at various altitudes. Also pictured is the 3D plot of one route from LA to Shenzhen in 16.08 Hours for a simulated hydrogen airship. All simulations were conducted using real hourly weather data from June 2025, when the jet stream is weakest for a lower bound on travel time estimates.</p>
-                            </p><div class="buttons">
-                                <a class="btn" href="./airship_interactive_3d_plot.html">View Interactive 3D Plot</a>
+                            <h2>Bird Song Generator using a Convolutional Self-Attention-based Variational Autoencoder</h2>
+                            <div class="meta">PyTorch · Variational Autoencoder</div>
+                            <p>A Machine Learning model capable of generating hybrid bird songs that combine the traits of multiple species. The model was trained on the British bird song dataset, which is relatively small, making it difficult for traditional models to generate realistic bird songs. A Variational Autoencoder uses a probabilistic approach to create a smooth latent space that is useful for generating bird songs that lie between data points. More information can be found in the GitHub README linked below. The Interactive Web UI allows users to explore the VAE's latent space visually and generate their own hybrid bird songs. Click on the link below to access the website and try it for yourself. Pan and zoom to explore the UMAP projections of each data point; labels for each species will appear if you zoom in. Click on a data point to add it to your selection; click the “X” icon on the left of each selected data point to remove it from your selection. Click “Generate Hybrid” to run the model on the latent vectors you selected. Note if only one data point was selected the model will reconstruct only that data point. The decoder was compiled for the web and runs locally using JavaScript, so it may take a few seconds for a spectrogram to generate. Once generated, a spectrogram will appear in the menu; press the play button to hear the audio. If the audio is too quiet, use the volume slider to increase its volume. Finally, the download button allows you to save the generated audio as a .wav file (the file's volume is also determined by the slider).</p><div class="buttons">
+                                <a class="btn" href="https://bitarmada.github.io/Bird-Song-Generator/interactiveUI/">Interactive Web UI</a>
+                                <a class="btn" href="https://github.com/BitArmada/Bird-Song-Generator">GitHub Repository</a>
                             </div>
                         </div>
                         <div>
-                            <div class="media"><img src="./assets/Optimal_Flight_Paths.png" alt="Optimal flight paths vs altitude"></div>
-                            <div class="caption">Path optimization for autonomous aircraft in time-dependent flow fields</div>
-                        </div>
-                        <div>
-                            <div class="media"><img src="./assets/global_path_label.png" alt="Optimal flight path LA to Shenzhen"></div>
-                            <div class="caption">LA to Shenzhen in 16.08 Hours</div>
+                            <div class="media"><img src="https://github.com/BitArmada/Bird-Song-Generator/blob/main/images/image-3.png?raw=true" alt="Bird Song Generator"></div>
+                            <div class="caption">Hybrid Bird Song Generator UI</div>
                         </div>
                     </div>
                 </section>
