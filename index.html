@@ -425,41 +425,28 @@
                     </div>
                 </section>
 
-                <section class="project layout-left" id="Aircraft-Optimization">
+                <section class="project layout-gallery" id="hartree-fock-1d">
                     <div class="project-grid">
-                        <div>
-                            <div class="media"><img src="./assets/aircraftdesign.png" alt="aircraft design visualization"></div>
-                            <div class="caption">Some data visualizations for the aircraft optimization project</div>
-                        </div>
                         <div class="content">
-                            <h2>Aircraft Design for Payload Optimization using Genetic Evolutionary Algorithm</h2>
-                            <div class="meta">Python · Genetic Algorithm · Aerodynamics</div>
-                            <p>This algorithm uses publicly available wind-tunnel data on thousands of airfoil geometries to evolve optimally efficient flying-wing aircraft. Originally designed for the SAE aero competition, in which aircraft are scored by the number of cylindrical water bottles they can carry. This algorithm simulates thousands of initially random aircraft designs and selects those with the best flight performance and payload capacity. The selected aircraft designs are then mutated and mixed to form future generations, and the process continues until convergence on an optimal solution. The simulation can accommodate many different airfoils along the wingspan and characterizes important features like passive stability and bending moments along the wing in addition to lift, drag, payload, and more.</p>
-                            <div class="buttons">
-                                <!-- <a class="btn" href="https://github.com/BitArmada/spectre/" target="_blank">GitHub</a>
-                                <a class="btn primary" href="https://bitarmada.github.io/spectre/" target="_blank">Live Demo</a> -->
-                                <!-- <a class="btn" href="#">Learn more</a> -->
-                            </div>
+                            <h2>Hartree-Fock multi-electron quantum simulation in 1d using custom Gaussian basis set</h2>
+                            <div class="meta">Quantum Simulation · Hartree-Fock · Python</div>
+                            <p>Simple quantum simulation algorithms struggle to capture the complex interactions between electrons that give rise to complex molecular orbitals. The Hartree-Fock method first solves electron wave functions independently and, over successive iterations, incorporates electron-electron repulsion between probabilistic “electron clouds”. This method allows all orbital wavefunctions to be decomposed into a linear combination of basis functions. My implementation uses a uniform fixed Gaussian basis set that spans the entire 1D space. This approach allows the electron repulsion integrals (computationally intensive calculations of electron repulsion) to be calculated only one time for the basis set. This allows electrons to move freely across the space without being constrained to the pre-defined electron orbital shapes that other algorithms use. This approach does not scale well as the number of basis functions increases. This project was a learning exercise that helped me understand Hartree-Fock Theory.
+                            </p>
+                            <!-- <div class="buttons">
+                                <a class="btn" href="./airship_interactive_3d_plot.html">View Interactive 3D Plot</a>
+                            </div> -->
+                        </div>
+                        <div>
+                            <div class="media"><img src="./assets/orbitals2.png" alt="two hydrogen atoms with overlapping electron clouds (7 electrons)"></div>
+                            <div class="caption">Hartree-Fock simulation results for a 1D quantum system (2 protons, 7 electrons)</div>
+                        </div>
+                        <div>
+                            <div class="media"><img src="./assets/nitrogen.png" alt="Hartree-Fock simulation results for a 1D nitrogen atom"></div>
+                            <div class="caption">Hartree-Fock simulation results for a 1D nitrogen atom</div>
                         </div>
                     </div>
                 </section>
 
-                <section class="project layout-gallery" id="bird-song-generator">
-                    <div class="project-grid">
-                        <div class="content">
-                            <h2>Bird Song Generator using a Convolutional Self-Attention-based Variational Autoencoder</h2>
-                            <div class="meta">PyTorch · Variational Autoencoder</div>
-                            <p>A Machine Learning model capable of generating hybrid bird songs that combine the traits of multiple species. The model was trained on the British bird song dataset, which is relatively small, making it difficult for traditional models to generate realistic bird songs. A Variational Autoencoder uses a probabilistic approach to create a smooth latent space that is useful for generating bird songs that lie between data points. More information can be found in the GitHub README linked below. The Interactive Web UI allows users to explore the VAE's latent space visually and generate their own hybrid bird songs. Click on the link below to access the website and try it for yourself. Pan and zoom to explore the UMAP projections of each data point; labels for each species will appear if you zoom in. Click on a data point to add it to your selection; click the “X” icon on the left of each selected data point to remove it from your selection. Click “Generate Hybrid” to run the model on the latent vectors you selected. Note if only one data point was selected the model will reconstruct only that data point. The decoder was compiled for the web and runs locally using JavaScript, so it may take a few seconds for a spectrogram to generate. Once generated, a spectrogram will appear in the menu; press the play button to hear the audio. If the audio is too quiet, use the volume slider to increase its volume. Finally, the download button allows you to save the generated audio as a .wav file (the file's volume is also determined by the slider).</p><div class="buttons">
-                                <a class="btn" href="https://bitarmada.github.io/Bird-Song-Generator/interactiveUI/">Interactive Web UI</a>
-                                <a class="btn" href="https://github.com/BitArmada/Bird-Song-Generator">GitHub Repository</a>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="media"><img src="https://github.com/BitArmada/Bird-Song-Generator/blob/main/images/image-3.png?raw=true" alt="Bird Song Generator"></div>
-                            <div class="caption">Hybrid Bird Song Generator UI</div>
-                        </div>
-                    </div>
-                </section>
 
                 <section class="project layout-right" id="layer-optimization">
                     <div class="project-grid">
@@ -476,6 +463,25 @@
                         <div>
                             <div class="media"><img src="./assets/PiInterpolated.png" alt="Layer optimization for anisotropic 3D printing"></div>
                             <div class="caption">Optimized layer lines for an example part under vertical loading</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="project layout-left" id="Aircraft-Optimization">
+                    <div class="project-grid">
+                        <div>
+                            <div class="media"><img src="./assets/aircraftdesign.png" alt="aircraft design visualization"></div>
+                            <div class="caption">Some data visualizations for the aircraft optimization project</div>
+                        </div>
+                        <div class="content">
+                            <h2>Aircraft Design for Payload Optimization using Genetic Evolutionary Algorithm</h2>
+                            <div class="meta">Python · Genetic Algorithm · Aerodynamics</div>
+                            <p>This algorithm uses publicly available wind-tunnel data on thousands of airfoil geometries to evolve optimally efficient flying-wing aircraft. Originally designed for the SAE aero competition, in which aircraft are scored by the number of cylindrical water bottles they can carry. This algorithm simulates thousands of initially random aircraft designs and selects those with the best flight performance and payload capacity. The selected aircraft designs are then mutated and mixed to form future generations, and the process continues until convergence on an optimal solution. The simulation can accommodate many different airfoils along the wingspan and characterizes important features like passive stability and bending moments along the wing in addition to lift, drag, payload, and more.</p>
+                            <div class="buttons">
+                                <!-- <a class="btn" href="https://github.com/BitArmada/spectre/" target="_blank">GitHub</a>
+                                <a class="btn primary" href="https://bitarmada.github.io/spectre/" target="_blank">Live Demo</a> -->
+                                <!-- <a class="btn" href="#">Learn more</a> -->
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -500,6 +506,23 @@
                                 <a class="btn primary" href="https://bitarmada.github.io/spectre/" target="_blank">Live Demo</a>
                                 <!-- <a class="btn" href="#">Learn more</a> -->
                             </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="project layout-gallery" id="bird-song-generator">
+                    <div class="project-grid">
+                        <div class="content">
+                            <h2>Bird Song Generator using a Convolutional Self-Attention-based Variational Autoencoder</h2>
+                            <div class="meta">PyTorch · Variational Autoencoder</div>
+                            <p>A Machine Learning model capable of generating hybrid bird songs that combine the traits of multiple species. The model was trained on the British bird song dataset, which is relatively small, making it difficult for traditional models to generate realistic bird songs. A Variational Autoencoder uses a probabilistic approach to create a smooth latent space that is useful for generating bird songs that lie between data points. More information can be found in the GitHub README linked below. The Interactive Web UI allows users to explore the VAE's latent space visually and generate their own hybrid bird songs. Click on the link below to access the website and try it for yourself. Pan and zoom to explore the UMAP projections of each data point; labels for each species will appear if you zoom in. Click on a data point to add it to your selection; click the “X” icon on the left of each selected data point to remove it from your selection. Click “Generate Hybrid” to run the model on the latent vectors you selected. Note if only one data point was selected the model will reconstruct only that data point. The decoder was compiled for the web and runs locally using JavaScript, so it may take a few seconds for a spectrogram to generate. Once generated, a spectrogram will appear in the menu; press the play button to hear the audio. If the audio is too quiet, use the volume slider to increase its volume. Finally, the download button allows you to save the generated audio as a .wav file (the file's volume is also determined by the slider).</p><div class="buttons">
+                                <a class="btn" href="https://bitarmada.github.io/Bird-Song-Generator/interactiveUI/">Interactive Web UI</a>
+                                <a class="btn" href="https://github.com/BitArmada/Bird-Song-Generator">GitHub Repository</a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="media"><img src="https://github.com/BitArmada/Bird-Song-Generator/blob/main/images/image-3.png?raw=true" alt="Bird Song Generator"></div>
+                            <div class="caption">Hybrid Bird Song Generator UI</div>
                         </div>
                     </div>
                 </section>
