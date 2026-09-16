@@ -467,6 +467,29 @@
                     </div>
                 </section>
 
+                <section class="project layout-gallery" id="Parafoil-Optimization">
+                    <div class="project-grid">
+                        <div class="content">
+                            <h2>Parafoil Parametric Design Optimization & Automatic Laser Cutting Template Generation</h2>
+                            <div class="meta">Python · Genetic Algorithm · Aerodynamics</div>
+                            <p>A Python program that parametrically generates parafoil geometries based on thousands of airfoil simulations and wind tunnel tests. Parafoils are constructed from lightweight fabric, so internal pressure must maintain their shape. In this case, it uses an inlet at the leading edge to inflate airfoil sections along the wing. Since fabric is not rigid, it also inflates and curves on the top and bottom of the wing, which must also be accounted for in parametric design. More traditional aerodynamic moment balancing equations are used to determine the lengths of chords attached to the parafoil to achieve passive stability. The chord lengths are calculated to maintain an elliptical lift distribution (bending moments are negligible for this design) along with the catenary arching structure, which reduces induced drag. The second part of this program calculates the 2d projections of each fabric panel and internal rib and generates sewing patterns with bounding boxes for each. These bounding boxes are then fed into a standard rectangle packing algorithm, which minimizes fabric scrap losses. The packed templates are then labeled and automatically rendered in SVG format for laser cutting.</p>
+                            <div class="buttons">
+                                <!-- <a class="btn" href="https://github.com/BitArmada/spectre/" target="_blank">GitHub</a>
+                                <a class="btn primary" href="https://bitarmada.github.io/spectre/" target="_blank">Live Demo</a> -->
+                                <!-- <a class="btn" href="#">Learn more</a> -->
+                            </div>
+                        </div>
+                        <div>
+                            <div class="media"><img src="./assets/parafoil3d.png" alt="optimized parafoil"></div>
+                            <div class="caption">Optimized parafoil design</div>
+                        </div>
+                        <div>
+                            <div class="media"><img src="./assets/parafoil_cutout_labeled.svg" alt="optimized parafoil cutting template"></div>
+                            <div class="caption">Optimized parafoil cutting template</div>
+                        </div>
+                    </div>
+                </section>
+
                 <section class="project layout-left" id="Aircraft-Optimization">
                     <div class="project-grid">
                         <div>
